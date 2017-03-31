@@ -4,7 +4,7 @@ var htmlmin = require('gulp-htmlmin');
 
 gulp.task('compilar-css', function() {
 	return gulp.src('./source/scss/*.scss')
-			.pipe(sass({compressed: true}))
+			.pipe(sass({outPutStyle: "compressed"}))
     		.pipe(gulp.dest('./dist/css'));		   
 });
 
