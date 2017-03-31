@@ -1,12 +1,20 @@
-var gulp = require("gulp");
-var sqwish = require('gulp-sqwish');
+var gulp 		= require("gulp");
+var sass 		= require('gulp-sass');
+var htmlmin = require('gulp-htmlmin');
 
-gulp.task('move-scss', function() {
+gulp.task('compilar-css', function() {
 	return gulp.src('./source/scss/*.scss')
-			.pipe(sqwish())
+			.pipe(sass({compressed: true}))
     		.pipe(gulp.dest('./dist/css'));		   
 });
 
+gulp.task('compilar-html', function() {
+	return gulp.src('./source/*.html')
+			.pipe(htmlmin({collapseWhitespace: true}))
+    	.pipe(gulp.dest('./dist'));		   
+});
+
 gulp.task('background', function() {
-	return gulp.watch('./source/**', ['move-scss']);
+	 gulp.watch('./source/scss/**/*.scss', ['compilar-css']);
+	 gulp.watch('./source/*.html', ['compilar-html']);
 });
